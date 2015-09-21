@@ -16,5 +16,8 @@
         "psr-4": {
             "PhpWatch\\": "src\\PhpWatch"
         }
+    },
+    "require-dev": {
+        "symfony/console": "^3.0@dev"
     }
 }

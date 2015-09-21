@@ -2,18 +2,48 @@
 
 namespace PhpWatch;
 
-class Watch implements Command
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+class Watch extends Command
 {
     
-    private $phpFile;
-    
-    public function __construct(PhpFile $phpFile)
+    protected function configure()
     {
-        $this->phpFile = $phpFile;
+        $this->setName('watch')
+            ->setDescription('Executes watch command')
+            ->addArgument(
+                'file',
+                InputArgument::REQUIRED
+            );
     }
-    
-    public function execute()
+
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->phpFile->turnOnWatch();
+        $realpath = $input->getArgument('file');
+
+        $output->writeln('Start watching : ' . $realpath);
+
+        $lastmodified = stat($realpath);
+
+        while (true) {
+            $current = stat($realpath);
+
+            if ($current['mtime'] > $lastmodified['mtime']) {
+                $output->writeln(
+                    'Modified ' . date('F j, Y, g:i a',
+                        $current['mtime']
+                    )
+                );
+
+                $output->writeln(shell_exec('php ' . escapeshellarg($realpath)));
+
+                $lastmodified = $current;
+            }
+
+            clearstatcache();
+        }
     }
 }

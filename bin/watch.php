@@ -1,9 +1,11 @@
+#!/usr/bin/env php
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
-$phpFile = new PhpWatch\PhpFile($argv[2]);
+use PhpWatch\Watch;
+use Symfony\Component\Console\Application;
 
-$command = new PhpWatch\Watch($phpFile);
-$invoke = new PhpWatch\Invoker($command);
-$invoke->run();
+$application = new Application();
+$application->add(new Watch());
+$application->run();
