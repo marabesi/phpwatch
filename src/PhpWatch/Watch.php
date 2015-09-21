@@ -6,44 +6,34 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use PhpWatch\Watch\ShellCommand;
 
-class Watch extends Command
+class Watch extends Command implements ShellCommand
 {
-    
+
+    use Watch\Base;
+    use Watch\Target;
+
     protected function configure()
     {
         $this->setName('watch')
             ->setDescription('Executes watch command')
             ->addArgument(
-                'file',
-                InputArgument::REQUIRED
-            );
+                'file', InputArgument::REQUIRED
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $realpath = $input->getArgument('file');
+        $this->setTarget(
+            $input->getArgument('file')
+        );
 
-        $output->writeln('Start watching : ' . $realpath);
+        $this->dispatch($output, $this);
+    }
 
-        $lastmodified = stat($realpath);
-
-        while (true) {
-            $current = stat($realpath);
-
-            if ($current['mtime'] > $lastmodified['mtime']) {
-                $output->writeln(
-                    'Modified ' . date('F j, Y, g:i a',
-                        $current['mtime']
-                    )
-                );
-
-                $output->writeln(shell_exec('php ' . escapeshellarg($realpath)));
-
-                $lastmodified = $current;
-            }
-
-            clearstatcache();
-        }
+    public function getCommand()
+    {
+        return 'php';
     }
 }

@@ -28,7 +28,7 @@ print 'my PHP script';
 
 2\. Go to terminal and execute the script
 ```
-matheus@marabesi /github/php-watch $ php bin/watch.php -f my_script.php
+matheus@marabesi /github/php-watch $ php bin/watch.php watch my_script.php
 Start watching : /github/php-watch/my_script.php
 ```
 3\. Just change it and see your changes automatically inthe terminal
