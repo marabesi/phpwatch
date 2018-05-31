@@ -1,8 +1,8 @@
-#PHP watch
+# PHP watch
 
 Are you tired of executing your PHP script in the command line ? PhpWatch can help you with that, just change your PHP script and see the output in the command line.
 
-##Normal flow
+## Normal flow
 
 1\. You write a PHP script
 ``` php
@@ -18,7 +18,7 @@ my PHP script
 
 3\. Change it and then run again, and then repeat the steps
 
-##PHP watch flow
+## PHP watch flow
 
 1\. You write a PHP script
 ``` php
