@@ -1,5 +1,5 @@
 {
-    "name": "phpwatch",
+    "name": "marabesi/phpwatch",
     "description": "Automatically reload your PHP files in terminal",
     "license": "GNU",
     "authors": [
