@@ -1,7 +1,7 @@
 {
     "name": "marabesi/phpwatch",
     "description": "Automatically reload your PHP files in terminal",
-    "license": "GNU",
+    "license": "Apache-2.0",
     "authors": [
         {
             "name": "Matheus Marabesi",
