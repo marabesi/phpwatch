@@ -2,9 +2,10 @@
 
 namespace Test\PhpWatch\Watch;
 
+use PHPUnit\Framework\TestCase;
 use PhpWatch\Watch\InputResolver;
 
-class InputResolverTest extends \PHPUnit_Framework_TestCase
+class InputResolverTest extends TestCase
 {
 
     public function testShouldResolveAnDirectory()
